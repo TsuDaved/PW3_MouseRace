@@ -3,6 +3,7 @@ const int leftSensor  = A0;
 const int rightSensor = A1;
 const int leftMotorPWM  = 10;
 const int rightMotorPWM = 11;
+int deadband = 8;
 
 void setup()
 {
@@ -16,4 +17,11 @@ void loop()
   // ---- Sensor averaging (reduces noise) ----
   int VL = (analogRead(leftSensor) + analogRead(leftSensor) + analogRead(leftSensor)) / 3;
   int VR = (analogRead(rightSensor) + analogRead(rightSensor) + analogRead(rightSensor)) / 3;
+  int diff = VL - VR;
+
+  // ---- Deadband (ignore very small differences) ----
+  if (abs(diff) < deadband)
+  {
+    diff = 0;
+  }
 }
