@@ -8,9 +8,12 @@ void setup()
 {
   pinMode(leftMotorPWM, OUTPUT);
   pinMode(rightMotorPWM, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  // to be implemented
+  // ---- Sensor averaging (reduces noise) ----
+  int VL = (analogRead(leftSensor) + analogRead(leftSensor) + analogRead(leftSensor)) / 3;
+  int VR = (analogRead(rightSensor) + analogRead(rightSensor) + analogRead(rightSensor)) / 3;
 }
